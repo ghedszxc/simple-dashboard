@@ -1,19 +1,19 @@
 <template>
   <div>
     <v-btn
+      block
       color="primary"
       variant="flat"
-      @click="addVisitorDialog = true"
+      @click="addUserDialog = true"
     >
       Add User
     </v-btn>
     
     <v-dialog
-      v-model="addVisitorDialog"
-      transition="dialog-right-transition"
-      fullscreen
-      persistent
-      :class="`${$vuetify.display.mdAndUp && 'dialog_desktop'}`"
+      v-model="addUserDialog"
+      transition="dialog-top-transition"
+      max-width="450px"
+      class="enhance_dialog"
     >
       <v-card
         :loading="isProgress"
@@ -37,7 +37,7 @@
           <v-btn
             color="grey-darken-1"
             icon="mdi-close"
-            @click="addVisitorDialog = false"
+            @click="addUserDialog = false"
           />
         </v-toolbar>
 
@@ -123,7 +123,7 @@
                       :disabled="isProgress"
                       @click="submit()"
                     >
-                      Add User
+                      Submit
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -138,7 +138,7 @@
 <script>
 export default {
     data:() => ({
-      addVisitorDialog: false,
+      addUserDialog: false,
 
       isValid: false,
       form: {

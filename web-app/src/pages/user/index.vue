@@ -8,7 +8,7 @@
         User Management
       </v-col>
 
-      <v-col cols="12">
+      <v-col cols="12" lg="2" offset-lg="10">
         <AddUser />
       </v-col>
 
@@ -224,14 +224,14 @@
 </template>
 <script>
 import useGlobal from '@/composables/useGlobal.js'
-import AddUser from './addUser.vue'
+import AddUser from '@/components/user/addUser.vue'
 export default {
+  components: {
+    AddUser
+  },
   setup() {
     const global = useGlobal()
     return { global }
-  },
-  components: {
-    AddUser
   },
   data:() => ({
   }),

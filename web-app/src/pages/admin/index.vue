@@ -8,6 +8,10 @@
         Admin Management
       </v-col>
 
+      <v-col cols="12" lg="2" offset-lg="10">
+        <AddAdmin />
+      </v-col>
+
       <v-col cols="12">
         <v-data-iterator
           :items="adminList"
@@ -198,7 +202,11 @@
 </template>
 <script>
 import useGlobal from '@/composables/useGlobal.js'
+import AddAdmin from '@/components/admin/addAdmin.vue'
 export default {
+  components: {
+    AddAdmin
+  },
   setup() {
     const global = useGlobal()
     return { global }
