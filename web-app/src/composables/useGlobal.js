@@ -8,21 +8,6 @@ export default function useGlobal() {
     ]
   }
 
-  const itemsPerPage = 10;
-
-  const tableActions = [
-    {
-      text: 'Update',
-      icon: 'mdi-pencil',
-      color: 'warning'
-    },
-    {
-      text: 'Delete',
-      icon: 'mdi-delete',
-      color: 'error'
-    },
-  ]
-
   function formatDate(date) {
     let formatDate = new Date(date)
     let month = formatDate.getMonth() + 1; // Months are zero-based
@@ -39,9 +24,6 @@ export default function useGlobal() {
 
   return {
     formRules,
-    itemsPerPage,
-    tableActions,
-    
     formatDate,
   };
 }

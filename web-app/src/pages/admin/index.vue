@@ -8,14 +8,18 @@
         Admin Management
       </v-col>
 
-      <v-col cols="12" lg="2" offset-lg="10">
+      <v-col
+        cols="12"
+        lg="2"
+        offset-lg="10"
+      >
         <AddAdmin />
       </v-col>
 
       <v-col cols="12">
         <v-data-iterator
           :items="adminList"
-          :items-per-page="global.itemsPerPage"
+          :items-per-page="10"
         >
           <template #header>
             <v-divider />
@@ -125,11 +129,15 @@
                             <template
                               v-for="(
                                 actionItem, key
-                              ) in global.tableActions"
+                              ) in actions"
                               :key="key"
                             >
                               <v-list-item
-                                @click=""
+                                @click="
+                                  actionItem.dialogData.action(
+                                    item.raw,
+                                  )
+                                "
                               >
                                 <template #title>
                                   <span class="text-caption">
@@ -144,7 +152,7 @@
                                 </template>
                               </v-list-item>
 
-                              <v-divider v-if="key + 1 !== global.tableActions.length" />
+                              <v-divider v-if="key + 1 !== actions.length" />
                             </template>
                           </v-list>
                         </v-menu>
@@ -198,23 +206,59 @@
         </v-data-iterator>
       </v-col>
     </v-row>
+
+    <EditAdmin />
   </div>
 </template>
 <script>
-import useGlobal from '@/composables/useGlobal.js'
-import AddAdmin from '@/components/admin/addAdmin.vue'
+import AddAdmin from '@/components/admin/add.vue'
+import EditAdmin from '@/components/admin/edit.vue'
 export default {
   components: {
-    AddAdmin
-  },
-  setup() {
-    const global = useGlobal()
-    return { global }
+    AddAdmin,
+    EditAdmin
   },
   computed: {
-    adminList(){
+    adminList() {
       return this.$store.state.user.adminList
+    },
+    actions() {
+      return [
+        {
+          text: "Edit",
+          value: "Edit",
+          icon: 'mdi-pencil',
+          color: 'warning',
+          dialogData: {
+            action: async (data) => {
+              this.editGroupByDialog(data);
+            },
+          },
+        },
+        {
+          text: "Delete",
+          value: "Delete",
+          icon: 'mdi-delete',
+          color: 'error',
+          dialogData: {
+            action: async (data) => {
+              await this.deleteGroupByDialog(data);
+            },
+          }
+        }
+      ];
     }
+  },
+  methods: {
+    editGroupByDialog(data) {
+      this.$store.commit("UPDATE_EDIT_DIALOG", true);
+      this.$store.commit("UPDATE_SELECTED_ITEM", data);
+
+      console.log("edit", data)
+    },
+    deleteGroupByDialog(data) {
+      console.log("delete", data)
+    },
   }
 }
 </script>

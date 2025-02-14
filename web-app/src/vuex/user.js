@@ -22,7 +22,11 @@ const userStore = {
                 name: 'Account Maanager',
                 members: ['Keith', 'Killua']
             },
-        ]
+        ],
+        addDialog: false,
+        editDialog: false,
+
+        selectedItem: {},
     }),
     mutations: {
         UPDATE_USER_LIST (state, payload) {
@@ -30,6 +34,15 @@ const userStore = {
         },
         UPDATE_ADMIN_LIST (state, payload) {
             state.adminList = payload
+        },
+        UPDATE_ADD_DIALOG (state, payload) {
+            state.addDialog = payload
+        },
+        UPDATE_EDIT_DIALOG (state, payload) {
+            state.editDialog = payload
+        },
+        UPDATE_SELECTED_ITEM (state, payload) {
+            state.selectedItem = payload
         },
     },
     actions: {

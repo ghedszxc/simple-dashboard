@@ -8,7 +8,11 @@
         User Management
       </v-col>
 
-      <v-col cols="12" lg="2" offset-lg="10">
+      <v-col
+        cols="12"
+        lg="2"
+        offset-lg="10"
+      >
         <AddUser />
       </v-col>
 
@@ -148,11 +152,15 @@
                           <template
                             v-for="(
                               actionItem, key
-                            ) in global.tableActions"
+                            ) in actions"
                             :key="key"
                           >
                             <v-list-item
-                              @click=""
+                              @click="
+                                actionItem.dialogData.action(
+                                  item.raw,
+                                )
+                              "
                             >
                               <template #title>
                                 <span class="text-caption">
@@ -167,7 +175,7 @@
                               </template>
                             </v-list-item>
 
-                            <v-divider v-if="key + 1 !== global.tableActions.length" />
+                            <v-divider v-if="key + 1 !== actions.length" />
                           </template>
                         </v-list>
                       </v-menu>
@@ -220,25 +228,64 @@
         </v-data-iterator>
       </v-col>
     </v-row>
+    
+    <EditUser />
   </div>
 </template>
 <script>
 import useGlobal from '@/composables/useGlobal.js'
-import AddUser from '@/components/user/addUser.vue'
+import AddUser from '@/components/user/add.vue'
+import EditUser from '@/components/user/edit.vue'
 export default {
   components: {
-    AddUser
+    AddUser,
+    EditUser,
   },
   setup() {
     const global = useGlobal()
     return { global }
   },
-  data:() => ({
-  }),
   computed: {
-    userList(){
+    userList() {
       return this.$store.state.user.userList
+    },
+    actions() {
+      return [
+        {
+          text: "Edit",
+          value: "Edit",
+          icon: 'mdi-pencil',
+          color: 'warning',
+          dialogData: {
+            action: async (data) => {
+              this.editUserByDialog(data);
+            },
+          },
+        },
+        {
+          text: "Delete",
+          value: "Delete",
+          icon: 'mdi-delete',
+          color: 'error',
+          dialogData: {
+            action: async (data) => {
+              await this.deleteUserByDialog(data);
+            },
+          }
+        }
+      ];
     }
+  },
+  methods: {
+    editUserByDialog(data) {
+      this.$store.commit("UPDATE_EDIT_DIALOG", true);
+      this.$store.commit("UPDATE_SELECTED_ITEM", data);
+
+      console.log("edit", data)
+    },
+    deleteUserByDialog(data) {
+      console.log("delete", data)
+    },
   }
 }
 </script>

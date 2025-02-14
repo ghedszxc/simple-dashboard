@@ -4,13 +4,13 @@
       block
       color="primary"
       variant="flat"
-      @click="addGroupDialog = true"
+      @click="addDialog = true"
     >
       Add Admin
     </v-btn>
     
     <v-dialog
-      v-model="addGroupDialog"
+      v-model="addDialog"
       transition="dialog-top-transition"
       max-width="450px"
       class="enhance_dialog"
@@ -37,7 +37,7 @@
           <v-btn
             color="grey-darken-1"
             icon="mdi-close"
-            @click="addGroupDialog = false"
+            @click="addDialog = false"
           />
         </v-toolbar>
 
@@ -105,17 +105,25 @@
 </template>
 <script>
 export default {
-    data:() => ({
-      addGroupDialog: false,
-
-      isValid: false,
-      groupName: '',
-      isProgress: false
-    }),
-    methods: {
-      onCloseDialog() {
-
+  data:() => ({
+    isValid: false,
+    groupName: '',
+    isProgress: false
+  }),
+  computed: {
+    addDialog: {
+      get(){
+        return this.$store.state.user.addDialog
       },
-    }
+      set(value){
+        this.$store.commit("UPDATE_ADD_DIALOG", value)
+      }
+    },
+  },
+  methods: {
+    onCloseDialog() {
+
+    },
+  }
 }
 </script>

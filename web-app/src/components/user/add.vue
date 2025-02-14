@@ -4,13 +4,13 @@
       block
       color="primary"
       variant="flat"
-      @click="addUserDialog = true"
+      @click="addDialog = true"
     >
       Add User
     </v-btn>
     
     <v-dialog
-      v-model="addUserDialog"
+      v-model="addDialog"
       transition="dialog-top-transition"
       max-width="450px"
       class="enhance_dialog"
@@ -37,7 +37,7 @@
           <v-btn
             color="grey-darken-1"
             icon="mdi-close"
-            @click="addUserDialog = false"
+            @click="addDialog = false"
           />
         </v-toolbar>
 
@@ -137,23 +137,31 @@
 </template>
 <script>
 export default {
-    data:() => ({
-      addUserDialog: false,
+  data:() => ({
+    isValid: false,
+    form: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: ''
+    },
 
-      isValid: false,
-      form: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: ''
+    isProgress: false
+  }),
+  computed: {
+    addDialog: {
+      get(){
+        return this.$store.state.user.addDialog
       },
+      set(value){
+        this.$store.commit("UPDATE_ADD_DIALOG", value)
+      }
+    },
+  },
+  methods: {
+    onCloseDialog() {
 
-      isProgress: false
-    }),
-    methods: {
-      onCloseDialog() {
-
-      },
-    }
+    },
+  }
 }
 </script>
