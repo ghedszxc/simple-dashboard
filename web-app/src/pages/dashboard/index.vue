@@ -13,7 +13,7 @@
       >
         <ejs-kanban
           id="kanban"
-          key-field="Status"
+          key-field="status"
           :data-source="list"
           :card-settings="cardSettings"
         >
@@ -44,33 +44,28 @@ export default {
     "e-columns": ColumnsDirective,
     "e-column": ColumnDirective,
   },
-  data() {
-    return {
-      list: [
-        {
-          Id: 1,
-          Status: 'Open',
-          Summary: 'Analyze the new requirements gathered from the customer.',
-          Assignee: 'Andrew Fuller'
-        },
+  data:() => ({
+    list: [
       {
-          Id: 2,
-          Status: 'InProgress',
-          Summary: 'Improve application performance',
-          Assignee: 'Andrew Fuller'
-        },
-        {
-          Id: 3,
-          Status: 'Close',
-          Summary: 'Arrange a web meeting with the customer to get new requirements.',
-          Assignee: 'Janet Leverling'
-        }
-      ],
-      cardSettings: {
-        contentField: "Summary",
-        headerField: "Id",
+        id: 1,
+        status: 'Open',
+        summary: 'Task-001',
+      },
+      {
+        id: 2,
+        status: 'InProgress',
+        summary: 'Task-002',
+      },
+      {
+        id: 3,
+        status: 'Close',
+        summary: 'Task-003',
       }
+    ],
+    cardSettings: {
+      contentField: "summary",
+      headerField: "id",
     }
-  }
+  })
 }
 </script>

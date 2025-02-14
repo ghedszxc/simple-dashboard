@@ -9,6 +9,10 @@
       </v-col>
 
       <v-col cols="12">
+        <AddUser />
+      </v-col>
+
+      <v-col cols="12">
         <v-data-iterator
           :items="userList"
           :items-per-page="global.itemsPerPage"
@@ -220,10 +224,14 @@
 </template>
 <script>
 import useGlobal from '@/composables/useGlobal.js'
+import AddUser from './addUser.vue'
 export default {
   setup() {
     const global = useGlobal()
     return { global }
+  },
+  components: {
+    AddUser
   },
   data:() => ({
   }),

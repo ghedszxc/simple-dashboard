@@ -33,4 +33,16 @@ export default {
   @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
   @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
   @import '../node_modules/@syncfusion/ej2-vue-kanban/styles/material.css';
+
+  /* ADD/EDIT DIALOG */
+.dialog_desktop {
+  margin: 0 0 0 auto;
+  max-width: 50vh;
+
+  box-shadow: -6px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: -6px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -6px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  
+  z-index: 9999999999999999 !important;
+}
 </style>
