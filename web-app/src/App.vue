@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="position: fixed; width: 100vw; padding: 0 15px 0 15px; z-index: 99999999999999;">
     <tool-bar v-if="isAuthorized" />
     <v-main>
       <router-view class="pa-5" />
