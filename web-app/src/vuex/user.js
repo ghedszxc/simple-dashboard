@@ -25,6 +25,7 @@ const userStore = {
         ],
         addDialog: false,
         editDialog: false,
+        deleteDialog: false,
 
         selectedItem: {},
     }),
@@ -40,6 +41,9 @@ const userStore = {
         },
         UPDATE_EDIT_DIALOG (state, payload) {
             state.editDialog = payload
+        },
+        UPDATE_DELETE_DIALOG (state, payload) {
+            state.deleteDialog = payload
         },
         UPDATE_SELECTED_ITEM (state, payload) {
             state.selectedItem = payload

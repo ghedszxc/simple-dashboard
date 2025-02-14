@@ -235,17 +235,17 @@ export default {
             },
           },
         },
-        {
-          text: "Delete",
-          value: "Delete",
-          icon: 'mdi-delete',
-          color: 'error',
-          dialogData: {
-            action: async (data) => {
-              await this.deleteGroupByDialog(data);
-            },
-          }
-        }
+        // {
+        //   text: "Delete",
+        //   value: "Delete",
+        //   icon: 'mdi-delete',
+        //   color: 'error',
+        //   dialogData: {
+        //     action: async (data) => {
+        //       await this.deleteGroupByDialog(data);
+        //     },
+        //   }
+        // }
       ];
     }
   },

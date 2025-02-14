@@ -230,16 +230,19 @@
     </v-row>
     
     <EditUser />
+    <DeleteUser />
   </div>
 </template>
 <script>
 import useGlobal from '@/composables/useGlobal.js'
 import AddUser from '@/components/user/add.vue'
 import EditUser from '@/components/user/edit.vue'
+import DeleteUser from '@/components/user/delete.vue'
 export default {
   components: {
     AddUser,
     EditUser,
+    DeleteUser
   },
   setup() {
     const global = useGlobal()
@@ -284,6 +287,9 @@ export default {
       console.log("edit", data)
     },
     deleteUserByDialog(data) {
+      this.$store.commit("UPDATE_DELETE_DIALOG", true);
+      this.$store.commit("UPDATE_SELECTED_ITEM", data);
+
       console.log("delete", data)
     },
   }

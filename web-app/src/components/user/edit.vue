@@ -138,8 +138,8 @@ export default {
     isProgress: false
   }),
   computed: {
-    selectedUser() {
-      return this.$store.state.user.selectedUser
+    selectedItem() {
+      return this.$store.state.user.selectedItem
     },
     editDialog: {
       get(){
