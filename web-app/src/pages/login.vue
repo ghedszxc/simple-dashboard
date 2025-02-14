@@ -1,5 +1,8 @@
 <template>
-  <v-row class="pa-8">
+  <v-row
+    v-if="!isAuthExist"
+    class="pa-8"
+  >
     <v-col
       cols="12"
       md="6"
@@ -72,6 +75,16 @@ export default {
             password: ""
         },
     }),
+    computed: {
+        isAuthExist() {
+            return localStorage.getItem("auth_token")
+        }
+    },
+    mounted(){
+        if (this.isAuthExist) {
+            this.$router.push(!this.isAuthExist ? '/login' : '/dashboard')
+        }
+    },
     methods: {
         async login() {
             if (this.isFormValid) {
@@ -86,7 +99,7 @@ export default {
                         timeout: 3000,
                     })
 
-                    this.$router.push('/user')
+                    this.$router.push('/dashboard')
                 } catch (err) {
                     this.$store.commit('UPDATE_SNACKBAR', {
                         isActive: true,
@@ -100,59 +113,3 @@ export default {
     }
 }
 </script>
-<!-- <script setup>
-import useGlobal from '@/composables/useGlobal';
-
-import router from '@/router';
-import Api from '@/services/api'
-import { ref, onMounted, computed } from 'vue';
-
-import { useStore } from 'vuex';
-const store = useStore();
-
-const isFormValid = ref(false)
-
-const isShowPassword = ref(false)
-const form = ref({
-    username: "",
-    password: ""
-})
-
-// onMounted(async () => {
-//     const _id = router.currentRoute.value.params.id
-//     if (_id) {
-//         Api.getDisciple(_id).then(res => {
-//             selectedDisciple.value = res.data
-//         })
-//     }
-// })
-
-async function login() {
-    if (isFormValid.value) {
-        try {
-            // await Api.login(form.value)
-            // useGlobal().snackbar.value = {
-            //     isActive: true,
-            //     color: 'success',
-            //     msg: 'this is it',
-            //     timeout: 3000,
-            // }
-
-            store.commit("UPDATE_SNACKBAR", {
-                isActive: true,
-                color: 'success',
-                msg: 'this is it',
-                timeout: 3000,
-            })
-
-            console.log(store._modules.root.state.global)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-}
-</script> -->
-
-<style scoped>
-
-</style>

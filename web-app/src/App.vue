@@ -2,7 +2,7 @@
   <v-app>
     <tool-bar v-if="isAuthorized" />
     <v-main>
-      <router-view />
+      <router-view class="pa-5" />
       <snack-bar />
     </v-main>
   </v-app>
@@ -13,9 +13,24 @@ export default {
   data:() => ({
     isAuthorized: false
   }),
-  mounted(){
-    this.isAuthorized = localStorage.getItem("auth_token") ? true : false
+  watch: {
+    '$route.path': {
+        handler: function() {
+          this.isAuthorized = localStorage.getItem("auth_token")
+        },
+        deep: true
+    }
   }
-
 }
 </script>
+<style>
+  /* KANBAN CSS */
+  @import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-layouts/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+  @import '../node_modules/@syncfusion/ej2-vue-kanban/styles/material.css';
+</style>
